@@ -22,7 +22,11 @@ const TrafficLightSimulator = () => {
     margin: '15px 0',
     backgroundColor: color,
     opacity: activeLight === color ? 1 : 0.3,
-    transition: 'all 0.3s ease-in-out',
+    boxShadow:
+      activeLight === color
+        ? `0 0 25px 10px ${color}`
+        : 'none',
+    transition: 'all 0.6s ease-in-out',
   });
 
   const containerStyle = {
