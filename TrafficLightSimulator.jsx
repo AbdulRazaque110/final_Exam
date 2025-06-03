@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const TrafficLightSimulator = () => {
-  const [activeLight, setActiveLight] = useState('red'); // state added but not yet used
+  const [activeLight, setActiveLight] = useState('red');
+
+  useEffect(() => {
+    const lightOrder = ['red', 'yellow', 'green'];
+    let currentIndex = 0;
+
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % lightOrder.length;
+      setActiveLight(lightOrder[currentIndex]);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const lightStyle = (color) => ({
     width: '80px',
@@ -9,7 +21,7 @@ const TrafficLightSimulator = () => {
     borderRadius: '50%',
     margin: '15px 0',
     backgroundColor: color,
-    opacity: activeLight === color ? 1 : 0.3, // dynamic style based on state
+    opacity: activeLight === color ? 1 : 0.3,
     transition: 'all 0.3s ease-in-out',
   });
 
